@@ -1,0 +1,20 @@
+name: kemal
+version: 0.1.0
+
+authors:
+  - Dmitriy <d.vishnevskiy@outlook.com>
+
+targets:
+  kemal:
+    main: src/kemal.cr
+
+crystal: 0.34.0
+
+license: MIT
+
+dependencies:
+  sentry:
+    github: samueleaton/sentry
+    branch: master
+  kemal:
+    github: kemalcr/kemal
