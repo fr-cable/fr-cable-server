@@ -1,6 +1,6 @@
 # Fr cable server
 
-It's pub/sub bus, connecting any clients with any servers on any protocols
+It's pub/sub bus, connecting any clients with any servers on any protocols.
 
 !!!WARNING!!! The project is at a very early stage of development, it can be used, but there is no guarantee that it works as you expect and that I will not abandon it tomorrow
 
