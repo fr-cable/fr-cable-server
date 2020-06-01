@@ -1,8 +1,5 @@
 version: 1.0
 shards:
-  exception_page:
-    github: crystal-loot/exception_page
-    version: 0.1.4
 
   kemal:
     github: kemalcr/kemal
