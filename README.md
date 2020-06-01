@@ -1,4 +1,4 @@
-# Js client for fr-cable server
+# Fr cable server
 
 It's pub/sub bus, connecting any clients with any servers on any protocols
 
