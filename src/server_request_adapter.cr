@@ -38,13 +38,15 @@ class ServerRequestAdapter
       @app.server_in_request_processor.process_accept_subscription(payload.to_s)
     when "deny_subscription"
       @app.server_in_request_processor.process_deny_subscription(payload.to_s)
+    when "add_server"
+      @app.server_in_request_processor.process_add_server(payload["key"].to_s, payload["url"].to_s)
     else
       #
     end
   end
 
-  def out_request(payload : String)
+  def out_request(server : StructServer, payload : String)
     puts "To server: #{payload}"
-    HTTP::Client.post(@app.config.server_out_url, body: payload)
+    HTTP::Client.post(server.server_url, body: payload)
   end
 end

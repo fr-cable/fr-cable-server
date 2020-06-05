@@ -8,31 +8,31 @@ class ClientOutRequestProcessor #CORP
 
   def process_deny_subscription(subscription : StructSubscription)
     spawn do
-      @app.client_request_adapter.out_request(subscription.connection.uuid, {type: "deny_subscription", payload: {room: subscription.room.name, connection: subscription.connection.uuid}}.to_json)
+      @app.client_request_adapter.out_request(subscription.connection, {type: "deny_subscription", payload: {room: subscription.room.name, connection: subscription.connection.uuid}}.to_json)
     end
   end
 
   def process_accept_subscription(subscription : StructSubscription)
     spawn do
-      @app.client_request_adapter.out_request(subscription.connection.uuid, {type: "accept_subscription", payload: {subscription: subscription.uuid, room: subscription.room.name, connection: subscription.connection.uuid}}.to_json)
+      @app.client_request_adapter.out_request(subscription.connection, {type: "accept_subscription", payload: {subscription: subscription.uuid, room: subscription.room.name, connection: subscription.connection.uuid}}.to_json)
     end
   end
 
   def process_accept_connection(connection : StructConnection)
     spawn do
-      @app.client_request_adapter.out_request(connection.uuid, {type: "accept_connection", payload: connection.uuid}.to_json)
+      @app.client_request_adapter.out_request(connection, {type: "accept_connection", payload: connection.uuid}.to_json)
     end
   end
 
   def process_deny_connection(connection : StructConnection)
     spawn do
-      @app.client_request_adapter.out_request(connection.uuid, {type: "deny_connection"}.to_json)
+      @app.client_request_adapter.out_request(connection, {type: "deny_connection"}.to_json)
     end
   end
 
   def process_message(subscription : StructSubscription, payload : String)
     spawn do
-      @app.client_request_adapter.out_request(subscription.connection.uuid, {type: "message", payload: {subscription: subscription.uuid, message: payload}}.to_json)
+      @app.client_request_adapter.out_request(subscription.connection, {type: "message", payload: {subscription: subscription.uuid, message: payload}}.to_json)
     end
   end
 end

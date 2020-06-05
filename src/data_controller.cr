@@ -18,11 +18,29 @@ class DataController
     @app.list_rooms.unsubscribe(subscription)
   end
 
+  def connect(server : StructServer)
+    @app.list_servers.connect(server)
+  end
+
+  def connect(room : StructRoom)
+    @app.list_servers.connect(room)
+    @app.list_rooms.connect(room)
+  end
+
+  def disconnect(room : StructRoom)
+    @app.list_servers.disconnect(room)
+    @app.list_rooms.disconnect(room)
+  end
+
   def connect(connection : StructConnection)
     @app.list_connections.connect(connection)
+    @app.list_servers.connect(connection)
+    @app.list_sockets.connect(connection)
   end
 
   def disconnect(connection : StructConnection)
+    @app.list_servers.disconnect(connection)
+    @app.list_sockets.disconnect(connection)
     @app.list_connections.disconnect(connection)
   end
 
