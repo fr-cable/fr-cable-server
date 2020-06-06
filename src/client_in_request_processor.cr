@@ -8,7 +8,11 @@ class ClientInRequestProcessor #CIRP
 
   def process_subscribe(connection_uuid : String, room_name : String)
     connection = @app.list_connections.get(connection_uuid)
-    room = @app.list_rooms.get_or_create(room_name)
+    room = @app.list_rooms.get("#{connection.server.uuid}:#{room_name}")
+    if room.nil?
+      room = StructRoom.new(connection.server, room_name)
+      @app.data_controller.connect(room)
+    end
     subscription = StructSubscription.new(connection, room)
     @app.data_controller.subscribe(subscription)
     @app.server_out_request_processor.process_subscribe(subscription)
@@ -25,8 +29,10 @@ class ClientInRequestProcessor #CIRP
     @app.server_out_request_processor.process_message(subscription, message)
   end
 
-  def process_connect
-    connection = StructConnection.new
+  def process_connect(socket_uuid : String, uuid : String )
+    socket = @app.list_sockets.get(socket_uuid)
+    server = @app.list_servers.get(uuid)
+    connection = StructConnection.new(socket, server)
     @app.data_controller.connect(connection)
     @app.server_out_request_processor.process_connect(connection)
     return connection.uuid

@@ -11,10 +11,13 @@ require "./config.cr"
 require "./list_connections.cr"
 require "./list_rooms.cr"
 require "./list_subscriptions.cr"
+require "./list_sockets.cr"
+require "./list_servers.cr"
 require "./struct_connection.cr"
 require "./struct_room.cr"
 require "./struct_subscription.cr"
-
+require "./struct_server.cr"
+require "./struct_socket.cr"
 class App
 
   def initialize
@@ -26,6 +29,18 @@ class App
   def list_connections
     @list_connections ||= begin
       ListConnections.new
+    end
+  end
+
+  def list_servers
+    @list_servers ||= begin
+      ListServers.new
+    end
+  end
+
+  def list_sockets
+    @list_sockets ||= begin
+      ListSockets.new
     end
   end
 

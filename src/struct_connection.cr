@@ -1,7 +1,7 @@
 class StructConnection
-  property uuid, accepted, create_time, aborted, subscriptions
+  property uuid, accepted, create_time, aborted, subscriptions, server, socket
 
-  def initialize
+  def initialize(@socket : StructSocket, @server : StructServer)
     @uuid = Random::Secure.hex
     @accepted = false
     @create_time = Time.utc
