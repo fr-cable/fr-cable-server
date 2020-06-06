@@ -1,7 +1,8 @@
 class StructServer
-  property server_url, key, connections, rooms
+  property server_url, uuid, connections, rooms
 
-  def initialize(@key : String, @server_url : String)
+  def initialize(@server_url : String)
+    @uuid = Random::Secure.hex
     @connections = {} of String => StructConnection
     @rooms = {} of String => StructRoom
   end

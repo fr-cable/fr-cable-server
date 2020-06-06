@@ -17,11 +17,10 @@ class ServerInRequestProcessor #SIRP
     end
   end
 
-  def process_add_server(key : String, url : String)
-    if @app.list_servers.get(key).nil?
-      server = StructServer.new(key, url)
-      @app.data_controller.connect(server)
-    end
+  def process_add_server(url : String)
+    server = StructServer.new(url)
+    @app.data_controller.connect(server)
+    @app.server_out_request_processor.process_server_added(server)
   end
 
   def process_accept_connection(connection_uuid : String)

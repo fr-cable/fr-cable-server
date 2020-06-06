@@ -6,12 +6,12 @@ class ListServers
     @servers = {} of String => StructServer
   end
 
-  def get(key : String)
-    @servers[key]
+  def get(uuid : String)
+    @servers[uuid]
   end
 
   def connect(server : StructServer)
-    @servers[server.key] = server
+    @servers[server.uuid] = server
   end
 
   def disconnect(server : StructServer)

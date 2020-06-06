@@ -39,7 +39,7 @@ class ServerRequestAdapter
     when "deny_subscription"
       @app.server_in_request_processor.process_deny_subscription(payload.to_s)
     when "add_server"
-      @app.server_in_request_processor.process_add_server(payload["key"].to_s, payload["url"].to_s)
+      @app.server_in_request_processor.process_add_server(payload["uuid"].to_s)
     else
       #
     end

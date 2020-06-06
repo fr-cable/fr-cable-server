@@ -6,6 +6,18 @@ class ServerOutRequestProcessor #SORP
 
   end
 
+  def process_server_added(server : StructServer)
+    spawn do
+      @app.server_request_adapter.out_request(
+        server,
+        {
+          type: "server_added",
+          payload: server.uuid
+        }.to_json
+      )
+    end
+  end
+
   def process_subscribe(subscription : StructSubscription)
     spawn do
       @app.server_request_adapter.out_request(

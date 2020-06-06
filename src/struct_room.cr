@@ -16,6 +16,6 @@ class StructRoom
   end
 
   def full_name
-    "#{server.key}:#{name}"
+    "#{server.uuid}:#{name}"
   end
 end
